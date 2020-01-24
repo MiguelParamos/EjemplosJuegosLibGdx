@@ -7,11 +7,13 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 
+import escuchadores.AndroidJugador;
 import escuchadores.TecladoJugador;
 import personajes.Jugador;
 
@@ -44,6 +46,7 @@ public class Juego extends ApplicationAdapter {
 
 		InputMultiplexer multiplexer = new InputMultiplexer();
 		multiplexer.addProcessor(new TecladoJugador(jugador));
+		multiplexer.addProcessor(new GestureDetector(new AndroidJugador(jugador)));
 		Gdx.input.setInputProcessor(multiplexer);
 	}
 
