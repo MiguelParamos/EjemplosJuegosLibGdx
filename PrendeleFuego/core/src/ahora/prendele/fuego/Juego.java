@@ -11,12 +11,15 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 
+import personajes.Jugador;
+
 public class Juego extends ApplicationAdapter {
 	private OrthogonalTiledMapRenderer renderer; //Clase auxiliar para renderizar un mapa.
 	private OrthographicCamera camera; //Cámara a través de la que veremos el mundo.
 	private static int WIDTH; //Aquí almacenaremos la anchura en tiles
 	private static int HEIGHT; //Aquí almacenaremos la altura en tiles
 	public static final float unitScale = 1/16f; //Nos servirá para establecer que la pantalla se divide en tiles de 32 pixeles;
+	private Jugador jugador;
 
 	@Override
 	public void create () {
@@ -33,6 +36,8 @@ public class Juego extends ApplicationAdapter {
 		camera.position.y=HEIGHT/2;
 		camera.zoom=0.5f;
 
+		jugador=new Jugador(camera);
+
 		camera.update();
 	}
 
@@ -44,11 +49,12 @@ public class Juego extends ApplicationAdapter {
 		renderer.setView(camera); //Establecemos la vista del mundo a través de la cámara.
 		renderer.render(); //Renderizamos la vista
 
-
+		jugador.dibujar();
 	}
 	
 	@Override
 	public void dispose () {
+		jugador.dispose();
 		renderer.dispose(); //Destruimos el objeto que renderiza un mapa, para no tener filtraciones de memoria
 	}
 }
