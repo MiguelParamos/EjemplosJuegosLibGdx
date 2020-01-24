@@ -36,7 +36,7 @@ public class Juego extends ApplicationAdapter {
 		camera.position.y=HEIGHT/2;
 		camera.zoom=0.5f;
 
-		jugador=new Jugador(camera);
+		jugador=new Jugador(camera,map);
 
 		camera.update();
 	}
@@ -47,10 +47,11 @@ public class Juego extends ApplicationAdapter {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
 		renderer.setView(camera); //Establecemos la vista del mundo a través de la cámara.
-		renderer.render(); //Renderizamos la vista
-
+		renderer.render(); //Renderizamos el mapa
 		jugador.dibujar();
 	}
+
+
 	
 	@Override
 	public void dispose () {
