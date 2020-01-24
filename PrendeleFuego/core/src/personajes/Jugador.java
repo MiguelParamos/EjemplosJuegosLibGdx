@@ -63,6 +63,49 @@ public class Jugador {
                         *(1/camara.zoom));
     }
 
+    /**
+     * Mueve el jugador un tile en la dirección establecida
+     * @param direccion 'u' -> arriba,'d' -> abajo,'l' -> izda, 'r' -> derecha
+     */
+    public void mover(char direccion){
+        switch (direccion){
+            case 'u':
+                //Cambio posición del jugador, todavía no cambia nada visualmente
+                if(posicionTiles.y<this.alturaMapaTiles-1) {
+                    posicionTiles.y++;
+                }
+                //Pongo la cámara donde esté el jugador, para que siempre quede centrado en el tile en que está
+                //Recuerdo que el jugador no está de verdad en el tile: El dibujado
+                //del sprite es independiente del dibujado del mapa, y solo estamos
+                //moviendo el mapa para hacer parecer que el personaje se mueve.
+                camara.position.y=posicionTiles.y;
+                break;
+            case 'd':
+                if(posicionTiles.y>0) {
+                    posicionTiles.y--;
+                }
+                camara.position.y=posicionTiles.y;
+                break;
+            case 'l':
+                if(posicionTiles.x>0) {
+                    posicionTiles.x--;
+                }
+                camara.position.x=posicionTiles.x;
+                break;
+            case 'r':
+                if(posicionTiles.x<this.anchuraMapaTiles-1) {
+                    posicionTiles.x++;
+                }
+                camara.position.x=posicionTiles.x;
+                break;
+        }
+        camara.update();
+    }
+
+    public OrthographicCamera getCamara(){
+        return camara;
+    }
+
     public void dispose(){
         batch.dispose();
     }

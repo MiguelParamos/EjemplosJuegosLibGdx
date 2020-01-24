@@ -2,6 +2,7 @@ package ahora.prendele.fuego;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -11,6 +12,7 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 
+import escuchadores.TecladoJugador;
 import personajes.Jugador;
 
 public class Juego extends ApplicationAdapter {
@@ -39,6 +41,10 @@ public class Juego extends ApplicationAdapter {
 		jugador=new Jugador(camera,map);
 
 		camera.update();
+
+		InputMultiplexer multiplexer = new InputMultiplexer();
+		multiplexer.addProcessor(new TecladoJugador(jugador));
+		Gdx.input.setInputProcessor(multiplexer);
 	}
 
 	@Override
