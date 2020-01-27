@@ -15,6 +15,8 @@ public class Juanka extends Actor {
 
         sprite=new Sprite(new Texture("jugadores/juankaAlien.png"));
         sprite.setBounds(0,0, Gdx.graphics.getWidth()/10,Gdx.graphics.getHeight()/7);
+        this.setOrigin(this.sprite.getWidth()/2,this.sprite.getHeight()/2);
+        sprite.setOrigin(this.getOriginX(),this.getOriginY());
         addListener(new EscuchadorJugador(this));
     }
 
@@ -22,6 +24,8 @@ public class Juanka extends Actor {
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
         sprite.setPosition(getX(),getY());
+        sprite.setScale(this.getScaleX(),getScaleY());
+        sprite.setRotation(this.getRotation());
         sprite.draw(batch);
     }
 }
