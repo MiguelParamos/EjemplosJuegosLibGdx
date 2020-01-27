@@ -26,6 +26,7 @@ public class Juanka extends Actor {
         sprite.setPosition(getX(),getY());
         sprite.setScale(this.getScaleX(),getScaleY());
         sprite.setRotation(this.getRotation());
+        sprite.setColor(getColor().r,getColor().g,getColor().b,getColor().a);
         sprite.draw(batch);
     }
 }
