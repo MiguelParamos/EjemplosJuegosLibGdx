@@ -18,12 +18,20 @@ public class Juego extends Game {
 	public void create () {
 		pantalla1=new Stage(new ScreenViewport());
 		pantalla1.addActor(new Juanka());
+
+		//Pongo el foco del movimiento en la pantalla 1
+		Gdx.input.setInputProcessor(pantalla1);
+
+		//Establezco que dentro de esa pantalla, voy a mover al actor Juanka, el
+		//Primero que se insertó.
+		pantalla1.setKeyboardFocus(pantalla1.getActors().get(0));
 	}
 
 	@Override
 	public void render () {
 		Gdx.gl.glClearColor(1, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		pantalla1.act(Gdx.graphics.getDeltaTime());
 		pantalla1.draw();
 	}
 	
