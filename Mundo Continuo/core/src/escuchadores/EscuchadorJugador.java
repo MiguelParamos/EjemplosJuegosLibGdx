@@ -1,6 +1,7 @@
 package escuchadores;
 
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
@@ -80,6 +81,9 @@ public class EscuchadorJugador extends InputListener {
                 sba.setAmount(0.5f);
                 sba.setDuration(1);
                 jugador.addAction(sba);
+                break;
+            case Input.Keys.F:
+
                 break;
             case Input.Keys.X:
                 SequenceAction parpadear=new SequenceAction(new SequenceAction(
