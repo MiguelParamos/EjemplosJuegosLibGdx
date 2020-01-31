@@ -20,6 +20,16 @@ public class Juanka extends Actor {
         addListener(new EscuchadorJugador(this));
     }
 
+    public Juanka(float x,float y){
+        sprite=new Sprite(new Texture("jugadores/juankaAlien.png"));
+        //Cambio Posición del Sprite
+        sprite.setBounds(x,y, Gdx.graphics.getWidth()/10,Gdx.graphics.getHeight()/7);
+        this.setPosition(x,y); //Cambio posición del actor
+        this.setOrigin(this.sprite.getWidth()/2,this.sprite.getHeight()/2);
+        sprite.setOrigin(this.getOriginX(),this.getOriginY());
+        addListener(new EscuchadorJugador(this));
+    }
+
     @Override
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
