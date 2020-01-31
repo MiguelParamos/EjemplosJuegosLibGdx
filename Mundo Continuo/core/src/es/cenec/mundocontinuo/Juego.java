@@ -19,10 +19,14 @@ import pantallas.BaseScreen;
 import pantallas.Pantalla1;
 
 public class Juego extends Game {
-	BaseScreen pantallaActual;
+	private BaseScreen pantallaActual;
 	@Override
 	public void create () {
-		pantallaActual=new Pantalla1(this);
+		this.setPantallaActual(new Pantalla1(this));
+	}
+
+	public void setPantallaActual(BaseScreen pa){
+		pantallaActual=pa;
 		setScreen(pantallaActual);
 	}
 

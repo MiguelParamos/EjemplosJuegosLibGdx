@@ -14,12 +14,12 @@ import com.badlogic.gdx.scenes.scene2d.actions.ScaleByAction;
 import com.badlogic.gdx.scenes.scene2d.actions.ScaleToAction;
 import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 
-import actores.Juanka;
+import actores.Personaje;
 
 public class EscuchadorJugador extends InputListener {
-    Juanka jugador;
+    Personaje jugador;
 
-    public EscuchadorJugador(Juanka j){
+    public EscuchadorJugador(Personaje j){
         this.jugador=j;
     }
 

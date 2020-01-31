@@ -8,35 +8,14 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 
 import escuchadores.EscuchadorJugador;
 
-public class Juanka extends Actor {
-    Sprite sprite;
+public class Juanka extends Personaje {
 
     public Juanka(){
-
-        sprite=new Sprite(new Texture("jugadores/juankaAlien.png"));
-        sprite.setBounds(0,0, Gdx.graphics.getWidth()/10,Gdx.graphics.getHeight()/7);
-        this.setOrigin(this.sprite.getWidth()/2,this.sprite.getHeight()/2);
-        sprite.setOrigin(this.getOriginX(),this.getOriginY());
-        addListener(new EscuchadorJugador(this));
+        super("jugadores/juankaAlien.png");
     }
 
     public Juanka(float x,float y){
-        sprite=new Sprite(new Texture("jugadores/juankaAlien.png"));
-        //Cambio Posición del Sprite
-        sprite.setBounds(x,y, Gdx.graphics.getWidth()/10,Gdx.graphics.getHeight()/7);
-        this.setPosition(x,y); //Cambio posición del actor
-        this.setOrigin(this.sprite.getWidth()/2,this.sprite.getHeight()/2);
-        sprite.setOrigin(this.getOriginX(),this.getOriginY());
-        addListener(new EscuchadorJugador(this));
+        super("jugadores/juankaAlien.png",x,y);
     }
 
-    @Override
-    public void draw(Batch batch, float parentAlpha) {
-        super.draw(batch, parentAlpha);
-        sprite.setPosition(getX(),getY());
-        sprite.setScale(this.getScaleX(),getScaleY());
-        sprite.setRotation(this.getRotation());
-        sprite.setColor(getColor().r,getColor().g,getColor().b,getColor().a);
-        sprite.draw(batch);
-    }
 }
