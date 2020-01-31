@@ -28,12 +28,13 @@ public class Juego extends Game {
 
 	@Override
 	public void render () {
+		//Mal hecho, cuando veamos por qué no se llama, hay que cambiarlo.
 		pantallaActual.render(Gdx.graphics.getDeltaTime());
 
 	}
 	
 	@Override
 	public void dispose () {
-
+		pantallaActual.dispose();
 	}
 }
