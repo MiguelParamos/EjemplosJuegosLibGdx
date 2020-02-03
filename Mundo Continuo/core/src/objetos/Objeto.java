@@ -46,4 +46,10 @@ public abstract class Objeto extends Actor {
         sprite.setColor(getColor().r,getColor().g,getColor().b,getColor().a);
         sprite.draw(batch);
     }
+
+    public void moverA(float x, float y) {
+        this.setPosition(x,y);
+        sprite.setPosition(x,y);
+    }
+
 }
