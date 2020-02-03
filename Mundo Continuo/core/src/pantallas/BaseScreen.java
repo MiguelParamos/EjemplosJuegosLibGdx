@@ -11,6 +11,8 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.FillViewport;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
+import java.util.Random;
+
 import actores.Alfredo;
 import actores.Antonio;
 import actores.Juanka;
@@ -19,6 +21,8 @@ import actores.Personaje;
 import es.cenec.mundocontinuo.Juego;
 import escuchadores.EscuchadorJugador;
 import escuchadores.EscuchadorStage;
+import objetos.Objeto;
+import objetos.PatitoDeGoma;
 
 public abstract class BaseScreen implements Screen {
     protected Juego game;
@@ -30,6 +34,7 @@ public abstract class BaseScreen implements Screen {
         game=g;
         //we initialize the stage
         pantalla=new Stage(new FillViewport(Gdx.graphics.getWidth(),Gdx.graphics.getHeight()));
+
         pantalla.addActor(new Juanka());
         pantalla.addActor(new Miguel(Gdx.graphics.getWidth()/2,
                 Gdx.graphics.getHeight()/2));
@@ -48,11 +53,16 @@ public abstract class BaseScreen implements Screen {
         pantalla.addListener(new EscuchadorStage(pantalla));
         Gdx.input.setInputProcessor(pantalla);
 
+        //Añado un patito de goma en una posición aleatoria
+        Random r=new Random();
+        float posXPatito=(float)r.nextInt(Gdx.graphics.getWidth()/10*9);
+        float posYPatito=(float)r.nextInt(Gdx.graphics.getHeight()/10*9);
+        pantalla.addActor(new PatitoDeGoma(posXPatito,posYPatito));
 
         //Establezco que dentro de esa pantalla, voy a mover al actor, el
         //Primero que se insertó.
         pantalla.setKeyboardFocus(pantalla.getActors().get(0));
-
+        pantalla.setDebugAll(true);
     }
 
     @Override
@@ -75,7 +85,29 @@ public abstract class BaseScreen implements Screen {
         pantalla.act(delta); //Realizamos las acciones dibujando el tiempo transcurrido entre frame y frame
         pantalla.draw();
 
-
+        for(int i=0;i<pantalla.getActors().size;i++) {
+            try {
+                Personaje per = (Personaje) pantalla.getActors().get(i);
+                for (int j=0;j<pantalla.getActors().size;j++) {
+                    try {
+                        Objeto obj = (Objeto) pantalla.getActors().get(j);
+                        if(per.checkCollision(obj)){
+                            per.addObjeto(obj);
+                            obj.reduce();
+                            pantalla.getActors().get(j).remove();
+                            per.cambiarFuerza(((PatitoDeGoma)obj).getFuerza());
+                            Gdx.app.log(per.getNombre(),
+                                    " coge un patito, que le cambia la fuerza: "
+                                            +((PatitoDeGoma) obj).getFuerza());
+                        }
+                    } catch (Exception ex) {
+                        //No puede hacer el casting a objeto, porque estoy mirando un personaje, no hago nada.
+                    }
+                }
+            } catch (Exception e) {
+                //No puede hacer el casting a personaje, porque el actor que estoy mirando es un patito de goma
+            }
+        }
     }
 
     @Override

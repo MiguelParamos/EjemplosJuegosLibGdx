@@ -12,10 +12,12 @@ public class Juanka extends Personaje {
 
     public Juanka(){
         super("jugadores/juankaAlien.png");
+        this.nombre="Juanka";
     }
 
     public Juanka(float x,float y){
         super("jugadores/juankaAlien.png",x,y);
+        this.nombre="Juanka";
     }
 
 }

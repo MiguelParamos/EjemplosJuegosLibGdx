@@ -22,6 +22,7 @@ public class Juego extends Game {
 	private BaseScreen pantallaActual;
 	@Override
 	public void create () {
+
 		this.setPantallaActual(new Pantalla1(this));
 	}
 
