@@ -1,4 +1,4 @@
-package actores;
+package objetos;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
@@ -10,34 +10,31 @@ import java.util.ArrayList;
 
 import escuchadores.EscuchadorJugador;
 
-public abstract class Personaje extends Actor {
+public abstract class Objeto extends Actor {
     protected Sprite sprite;
-    protected ArrayList<Sprite> objetos;
 
-    public Personaje(String rutaTextura){
-        objetos=new ArrayList<Sprite>();
+    public Objeto(String rutaTextura){
         sprite=new Sprite(new Texture(rutaTextura));
         sprite.setBounds(0,0, Gdx.graphics.getWidth()/10,Gdx.graphics.getHeight()/7);
         this.setOrigin(this.sprite.getWidth()/2,this.sprite.getHeight()/2);
         sprite.setOrigin(this.getOriginX(),this.getOriginY());
-        addListener(new EscuchadorJugador(this));
     }
 
-    public void addObjeto()
-
-    public Personaje(String rutaTextura,float x,float y) {
+    /**
+     * Constructor con todos los parámetros de objeto
+     * @param rutaTextura la textura que usamos
+     * @param x posicion x inicial
+     * @param y posicion y inicial
+     * @param w anchura inicial
+     * @param h altura inicial
+     */
+    public Objeto(String rutaTextura,float x,float y,float w,float h) {
         //Cambio Posición del Sprite
         sprite=new Sprite(new Texture(rutaTextura));
-        sprite.setBounds(x,y, Gdx.graphics.getWidth()/10,Gdx.graphics.getHeight()/7);
+        sprite.setBounds(x,y, w,h);
         this.setPosition(x,y); //Cambio posición del actor
         this.setOrigin(this.sprite.getWidth()/2,this.sprite.getHeight()/2);
         sprite.setOrigin(this.getOriginX(),this.getOriginY());
-        addListener(new EscuchadorJugador(this));
-    }
-
-    public void moverAPixel(float x,float y){
-        this.setPosition(x,y);
-        sprite.setPosition(x,y);
     }
 
     @Override
@@ -49,5 +46,4 @@ public abstract class Personaje extends Actor {
         sprite.setColor(getColor().r,getColor().g,getColor().b,getColor().a);
         sprite.draw(batch);
     }
-
 }
