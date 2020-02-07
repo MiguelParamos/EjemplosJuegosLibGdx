@@ -9,6 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.actions.MoveByAction;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 import escuchadores.EscuchadorJugador;
 import objetos.Objeto;
@@ -20,12 +21,12 @@ public abstract class Personaje extends Actor {
     protected boolean colliding; //Nos detecta si está colisionando o no
     private int velocidad;
     protected String nombre;
-    private int moving; //Indica si mi personaje se mueve o no.
+    private HashSet<Integer> moving; //Dependiendo de la dirección que contenga, se mueve, y puede combinar más de una dirección a la vez
 
 
 
     public Personaje(String rutaTextura){
-        this.moving=-1;
+        this.moving=new HashSet<Integer>();
         velocidad=10;
         fuerza=100;
         colliding=false;
@@ -41,7 +42,7 @@ public abstract class Personaje extends Actor {
 
     public Personaje(String rutaTextura, float x, float y) {
         //Cambio Posición del Sprite
-        this.moving=-1;
+        this.moving=new HashSet<Integer>();
         sprite=new Sprite(new Texture(rutaTextura));
         fuerza=100;
         velocidad=10;
@@ -118,31 +119,29 @@ public abstract class Personaje extends Actor {
         return colliding;
     }
 
-    public int getMoving(){
+    public HashSet<Integer> getMoving(){
         return moving;
     }
 
-    public void setMoving(int moving) {
-        this.moving = moving;
+    /**
+     * Introduce en el set la dirección en que se va a mover
+     * @param direccion segun el numero, es una direccion 0-3
+     */
+    public void startMoving(Integer direccion){
+        this.moving.add(direccion);
+    }
+
+    public void stopMoving(int direccion){
+        this.moving.remove(direccion);
     }
 
     @Override
     public void act(float delta) {
         super.act(delta);
-        switch (moving){
-            case 0:
-                moveUp(delta);
-                break;
-            case 1:
-                moveRight(delta);
-                break;
-            case 2:
-                moveDown(delta);
-                break;
-            case 3:
-                moveLeft(delta);
-                break;
-        }
+        if(moving.contains(0)){moveUp(delta);}
+        if(moving.contains(1)){moveRight(delta);}
+        if(moving.contains(2)){moveDown(delta);}
+        if(moving.contains(3)){moveLeft(delta);}
     }
 
     public void moveLeft(float delta) {

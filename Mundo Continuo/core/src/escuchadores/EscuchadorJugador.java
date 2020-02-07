@@ -31,25 +31,25 @@ public class EscuchadorJugador extends InputListener {
         ScaleByAction sba=new ScaleByAction();
         switch (keycode){
             case Input.Keys.D:
-                jugador.setMoving(1);
+                jugador.startMoving(1);
                /* mba.setDuration(1);
                 mba.setAmount(jugador.getVelocidad(),0);
                 jugador.addAction(mba); */
                 break;
             case Input.Keys.S:
-                jugador.setMoving(2);
+                jugador.startMoving(2);
                 /*mba.setDuration(1);
                 mba.setAmount(0,-jugador.getVelocidad());
                 jugador.addAction(mba); */
                 break;
             case Input.Keys.A:
-                jugador.setMoving(3);
+                jugador.startMoving(3);
               /*  mba.setDuration(1);
                 mba.setAmount(-jugador.getVelocidad(),0);
                 jugador.addAction(mba); */
                 break;
             case Input.Keys.W:
-                jugador.setMoving(0);
+                jugador.startMoving(0);
                /* mba.setDuration(1);
                 mba.setAmount(0,jugador.getVelocidad());
                 jugador.addAction(mba); */
@@ -125,11 +125,16 @@ public class EscuchadorJugador extends InputListener {
     public boolean keyUp(InputEvent event, int keycode) {
         switch (keycode){
             case Input.Keys.W:
+                jugador.stopMoving(0);
+                break;
             case Input.Keys.A:
+                jugador.stopMoving(3);
+                break;
             case Input.Keys.S:
+                jugador.stopMoving(2);
+                break;
             case Input.Keys.D:
-                //Establezco que deje de moverse.
-                jugador.setMoving(-1);
+                jugador.stopMoving(1);
                 break;
 
         }
