@@ -131,13 +131,13 @@ public abstract class Personaje extends Actor {
         super.act(delta);
         switch (moving){
             case 0:
-                //  moveUp(delta);
+                moveUp(delta);
                 break;
             case 1:
-                //moveRight(delta);
+                moveRight(delta);
                 break;
             case 2:
-               // moveDown(delta);
+                moveDown(delta);
                 break;
             case 3:
                 moveLeft(delta);
@@ -155,4 +155,33 @@ public abstract class Personaje extends Actor {
             addAction(moveLeftAction);
         }}
 
+    public void moveUp(float delta) {
+        if(getY()>= Gdx.graphics.getHeight()){
+            setY(-getHeight());
+        }else {
+            MoveByAction moveUpAction = new MoveByAction();
+            moveUpAction.setAmount(0,this.velocidad);
+            moveUpAction.setDuration(delta);
+            addAction(moveUpAction);
+        }}
+
+    public void moveDown(float delta) {
+        if(getY()<=-getHeight()){
+            setY(Gdx.graphics.getHeight());
+        }else {
+            MoveByAction moveDownAction = new MoveByAction();
+            moveDownAction.setAmount(0,-this.velocidad);
+            moveDownAction.setDuration(delta);
+            addAction(moveDownAction);
+        }}
+
+    public void moveRight(float delta) {
+        if(getX()>= Gdx.graphics.getWidth()){
+            setX(-getWidth());
+        }else {
+            MoveByAction moveRightAction = new MoveByAction();
+            moveRightAction.setAmount(this.velocidad, 0);
+            moveRightAction.setDuration(delta);
+            addAction(moveRightAction);
+        }}
 }

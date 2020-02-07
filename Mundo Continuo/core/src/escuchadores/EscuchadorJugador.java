@@ -32,27 +32,27 @@ public class EscuchadorJugador extends InputListener {
         switch (keycode){
             case Input.Keys.D:
                 jugador.setMoving(1);
-                mba.setDuration(1);
+               /* mba.setDuration(1);
                 mba.setAmount(jugador.getVelocidad(),0);
-                jugador.addAction(mba);
+                jugador.addAction(mba); */
                 break;
             case Input.Keys.S:
                 jugador.setMoving(2);
-                mba.setDuration(1);
+                /*mba.setDuration(1);
                 mba.setAmount(0,-jugador.getVelocidad());
-                jugador.addAction(mba);
+                jugador.addAction(mba); */
                 break;
             case Input.Keys.A:
                 jugador.setMoving(3);
-                mba.setDuration(1);
+              /*  mba.setDuration(1);
                 mba.setAmount(-jugador.getVelocidad(),0);
-                jugador.addAction(mba);
+                jugador.addAction(mba); */
                 break;
             case Input.Keys.W:
                 jugador.setMoving(0);
-                mba.setDuration(1);
+               /* mba.setDuration(1);
                 mba.setAmount(0,jugador.getVelocidad());
-                jugador.addAction(mba);
+                jugador.addAction(mba); */
                 break;
             case Input.Keys.R: //Reset, volver al 0,0
                 mta.setPosition(0,0);
