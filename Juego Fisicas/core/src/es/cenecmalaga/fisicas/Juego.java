@@ -8,7 +8,11 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
+import com.badlogic.gdx.physics.box2d.FixtureDef;
+import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
@@ -30,6 +34,15 @@ public class Juego extends Game {
 		pollo=new Pollo(world);
 		camara=new OrthographicCamera(10,10);
 		this.debugRenderer=new Box2DDebugRenderer();
+
+		BodyDef propiedadesSuelo= new BodyDef(); //Establecemos las propiedades del cuerpo
+		propiedadesSuelo.type = BodyDef.BodyType.StaticBody;
+		Body suelo = world.createBody(propiedadesSuelo);
+		FixtureDef propiedadesFisicasSuelo=new FixtureDef();
+		propiedadesFisicasSuelo.shape = new PolygonShape();
+		((PolygonShape)propiedadesFisicasSuelo.shape).setAsBox(100/2f, 1/2f);
+		propiedadesFisicasSuelo.density = 1f;
+		suelo.createFixture(propiedadesFisicasSuelo);
 	}
 
 	@Override
