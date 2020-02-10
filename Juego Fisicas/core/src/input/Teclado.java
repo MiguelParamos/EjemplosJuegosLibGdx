@@ -1,25 +1,20 @@
-package Input;
+package input;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
-import com.badlogic.gdx.scenes.scene2d.actions.Actions;
-import com.badlogic.gdx.scenes.scene2d.actions.MoveByAction;
-import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 
-import Actors.Calipo;
+import Personajes.Pollo;
 
 /**
  * Created by Miguel on 17/02/2019.
  */
 
 public class Teclado implements InputProcessor {
-    Calipo actor;
+    Pollo actor;
 
-    public Teclado (Calipo j){
+    public Teclado(Pollo j){
         this.actor=j;
     }
 
@@ -29,18 +24,18 @@ public class Teclado implements InputProcessor {
         Gdx.app.log("eventoDown","Input "+keycode);
         switch (keycode) {
             case Input.Keys.LEFT:
-                actor.getCuerpo().applyForceToCenter(-1000,1000,true);
+                actor.getCuerpo().applyForceToCenter(-100,100,true);
                 break;
             case Input.Keys.R:
                 actor.getCuerpo().setLinearVelocity(new Vector2(0,0));
                 actor.getCuerpo().setAngularVelocity(0);
-                actor.getCuerpo().setTransform(0,30,0);
+                actor.getCuerpo().setTransform(10,10,0);
                 break;
             case Input.Keys.RIGHT:
-                actor.getCuerpo().applyForceToCenter(1000,1000,true);
+                actor.getCuerpo().applyForceToCenter(100,100,true);
                 break;
             case Input.Keys.UP:
-                actor.getCuerpo().applyForceToCenter(0,3000,true);
+                actor.getCuerpo().applyForceToCenter(0,100,true);
                 break;
     }
         return true;

@@ -14,7 +14,7 @@ import com.badlogic.gdx.physics.box2d.World;
 
 import java.util.Random;
 
-public class Calipo {
+public class Jackie {
     protected Sprite sprite;
     private World mundo;
     private BodyDef propiedadesCuerpo;
@@ -22,9 +22,9 @@ public class Calipo {
     private FixtureDef propiedadesFisicasCuerpo;
 
 
-    public Pollo(World w,int posx,int posy){
+    public Jackie(World w,int posx,int posy){
         this.mundo=w;
-        sprite=new Sprite(new Texture("personajes/pollo.png"));
+        sprite=new Sprite(new Texture("personajes/jackie.png"));
         Random r=new Random();
         int anchuraSprite=1; //Hablamos de metros
         int alturaSprite=1; //Hablamos de metros
@@ -40,10 +40,7 @@ public class Calipo {
 
         propiedadesFisicasCuerpo = new FixtureDef();
         propiedadesFisicasCuerpo.shape = new PolygonShape();
-        propiedadesFisicasCuerpo.filter.groupIndex =
-                this instanceof Pollo
-                        ? (short)1
-                        : (short)2;
+
         //Recibe la media anchura y la media altura. Por algún motivo alguien decidió que eso era buena idea y para nada confuso :P
         //Asegurarse siempre de que se hace la cuenta con flotantes, no con enteros, o saltará un error
         ((PolygonShape)propiedadesFisicasCuerpo.shape).setAsBox(anchuraSprite/2f, alturaSprite/2f);
