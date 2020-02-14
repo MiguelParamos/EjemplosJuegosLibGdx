@@ -35,6 +35,7 @@ public class Jackie {
 
         propiedadesFisicasCuerpo = new FixtureDef();
         propiedadesFisicasCuerpo.shape = new PolygonShape();
+        propiedadesFisicasCuerpo.isSensor=true;
         ((PolygonShape)propiedadesFisicasCuerpo.shape).setAsBox(anchuraSprite/2f, alturaSprite/2f);
         propiedadesFisicasCuerpo.density = 1f;
         cuerpo.createFixture(propiedadesFisicasCuerpo);

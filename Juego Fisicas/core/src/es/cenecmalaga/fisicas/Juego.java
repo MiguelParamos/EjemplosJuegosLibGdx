@@ -109,6 +109,10 @@ public class Juego extends Game {
 				contact.getFixtureB().getBody()==pollo2.getCuerpo()){
 					Gdx.app.log("Pollo","Choque de pollos");
 				}
+				if(contact.getFixtureA().getBody()==pollo.getCuerpo()&&
+						contact.getFixtureB().getBody()==jackie.getCuerpo()){
+					pollo.getCuerpo().applyForceToCenter(300,500,true);
+				}
 			}
 
 			@Override
@@ -138,9 +142,9 @@ public class Juego extends Game {
 		renderer.render();
 		batch.setProjectionMatrix(camara.combined);
 		batch.begin();
+		jackie.draw(batch,0);
 		pollo.draw(batch,0);
 		pollo2.draw(batch,0);
-		jackie.draw(batch,0);
 		batch.end();
 
 		camara.update();
