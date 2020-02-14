@@ -24,7 +24,11 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.ChainShape;
 import com.badlogic.gdx.physics.box2d.CircleShape;
+import com.badlogic.gdx.physics.box2d.Contact;
+import com.badlogic.gdx.physics.box2d.ContactImpulse;
+import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
+import com.badlogic.gdx.physics.box2d.Manifold;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.Shape;
 import com.badlogic.gdx.physics.box2d.World;
@@ -38,6 +42,7 @@ import input.Teclado;
 public class Juego extends Game {
 	private World world;
 	private Pollo pollo;
+	private Pollo pollo2;
 	private Box2DDebugRenderer debugRenderer;
 	private SpriteBatch batch;
 	private OrthographicCamera camara;
@@ -51,6 +56,7 @@ public class Juego extends Game {
 		batch=new SpriteBatch();
 		world=new World(new Vector2(0,-9.8f),true);
 		pollo=new Pollo(world);
+		pollo2=new Pollo(world);
 		camara=new OrthographicCamera(10,10);
 		this.debugRenderer=new Box2DDebugRenderer();
 		camara.position.x=pollo.getX();
@@ -88,11 +94,40 @@ public class Juego extends Game {
 
 		teclado=new Teclado(pollo);
 		Gdx.input.setInputProcessor(teclado);
+
+		//Se comparan cuerpos para saber si hay colisión, y qué colisiona con qué.
+		world.setContactListener(new ContactListener() {
+			@Override
+			public void beginContact(Contact contact) {
+				Gdx.app.log("Contacto comenzado!",contact.getFixtureA()+" : "+contact.getFixtureB());
+				Gdx.app.log("Es figura A pollo?",(contact.getFixtureA().getBody()==pollo.getCuerpo())+"");
+				Gdx.app.log("Es figura B pollo?",(contact.getFixtureB().getBody()==pollo.getCuerpo())+"");
+				if(contact.getFixtureA().getBody()==pollo.getCuerpo()&&
+				contact.getFixtureB().getBody()==pollo2.getCuerpo()){
+					Gdx.app.log("Pollo","Choque de pollos");
+				}
+			}
+
+			@Override
+			public void endContact(Contact contact) {
+
+			}
+
+			@Override
+			public void preSolve(Contact contact, Manifold oldManifold) {
+
+			}
+
+			@Override
+			public void postSolve(Contact contact, ContactImpulse impulse) {
+
+			}
+		});
 	}
 
 	@Override
 	public void render () {
-		Gdx.gl.glClearColor(1, 1, 1, 1);
+		Gdx.gl.glClearColor(0.4f, 0.4f, 0.7f, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		world.step(Gdx.graphics.getDeltaTime(), 6, 2);
 		pollo.seguir(camara);
@@ -101,6 +136,7 @@ public class Juego extends Game {
 		batch.setProjectionMatrix(camara.combined);
 		batch.begin();
 		pollo.draw(batch,0);
+		pollo2.draw(batch,0);
 		batch.end();
 
 		camara.update();
