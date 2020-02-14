@@ -57,4 +57,12 @@ public class Pollo  {
         sprite.draw(batch);
     }
 
+    public float getX(){
+        return this.cuerpo.getPosition().x;
+    }
+
+
+    public float getY(){
+        return this.cuerpo.getPosition().y;
+    }
 }
