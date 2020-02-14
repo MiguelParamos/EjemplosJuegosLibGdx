@@ -36,6 +36,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.sun.org.apache.xpath.internal.operations.Or;
 
+import Personajes.Jackie;
 import Personajes.Pollo;
 import input.Teclado;
 
@@ -43,6 +44,7 @@ public class Juego extends Game {
 	private World world;
 	private Pollo pollo;
 	private Pollo pollo2;
+	private Jackie jackie;
 	private Box2DDebugRenderer debugRenderer;
 	private SpriteBatch batch;
 	private OrthographicCamera camara;
@@ -57,6 +59,7 @@ public class Juego extends Game {
 		world=new World(new Vector2(0,-9.8f),true);
 		pollo=new Pollo(world);
 		pollo2=new Pollo(world);
+		jackie=new Jackie(world);
 		camara=new OrthographicCamera(10,10);
 		this.debugRenderer=new Box2DDebugRenderer();
 		camara.position.x=pollo.getX();
@@ -137,6 +140,7 @@ public class Juego extends Game {
 		batch.begin();
 		pollo.draw(batch,0);
 		pollo2.draw(batch,0);
+		jackie.draw(batch,0);
 		batch.end();
 
 		camara.update();
