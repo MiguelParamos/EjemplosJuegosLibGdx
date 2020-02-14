@@ -33,6 +33,7 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.sun.org.apache.xpath.internal.operations.Or;
 
 import Personajes.Pollo;
+import input.Teclado;
 
 public class Juego extends Game {
 	private World world;
@@ -43,6 +44,7 @@ public class Juego extends Game {
 	private TiledMap mapa;
 	private OrthogonalTiledMapRenderer renderer;
 	private static final float pixelsPorCuadro=16f;
+	private Teclado teclado;
 
 	@Override
 	public void create () {
@@ -73,7 +75,7 @@ public class Juego extends Game {
 
 
 		//Creamos el cuerpo físico de todos los rectángulos del tmx
-		for (MapObject objeto:mapa.getLayers().get("suelo").getObjects()){
+		for (MapObject objeto:mapa.getLayers().get("objetos").getObjects()){
 			BodyDef propiedadesRectangulo= new BodyDef(); //Establecemos las propiedades del cuerpo
 			propiedadesRectangulo.type = BodyDef.BodyType.StaticBody;
 			Body rectanguloSuelo = world.createBody(propiedadesRectangulo);
@@ -83,6 +85,9 @@ public class Juego extends Game {
 			propiedadesFisicasRectangulo.density = 1f;
 			rectanguloSuelo.createFixture(propiedadesFisicasRectangulo);
 		}
+
+		teclado=new Teclado(pollo);
+		Gdx.input.setInputProcessor(teclado);
 	}
 
 	@Override
@@ -90,6 +95,7 @@ public class Juego extends Game {
 		Gdx.gl.glClearColor(1, 1, 1, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		world.step(Gdx.graphics.getDeltaTime(), 6, 2);
+		pollo.seguir(camara);
 		renderer.setView(camara);
 		renderer.render();
 		batch.setProjectionMatrix(camara.combined);
