@@ -12,7 +12,7 @@
         <activity android:name=".PantallaIntercambiarFragments"></activity>
 
         <service
-            android:name=".Servicio"
+            android:name=".servicios.Servicio"
             android:enabled="true"
             android:exported="true" />
 

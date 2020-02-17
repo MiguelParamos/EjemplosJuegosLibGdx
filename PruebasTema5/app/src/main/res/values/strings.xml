@@ -4,4 +4,9 @@
     <string name="pulsame">Púlsame!</string>
     <string name="hello_blank_fragment">Hola, fragmento en blanco</string>
     <string name="irAIntercambiarFragments">Ir a intercambiar Fragments</string>
+    <string name="fragmento2">Fragmento 2</string>
+    <string name="fragmento3">Fragmento 3</string>
+    <string name="fragmento4">Fragmento 4</string>
+    <string name="nombre">Nombre</string>
+    <string name="esteEsElFragment4">Este es el Fragment 4</string>
 </resources>

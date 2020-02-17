@@ -19,22 +19,24 @@
     <fragment
         android:id="@+id/fragment"
         android:name="es.cenecmalaga.pruebastema5.fragmentos.Fragmento1"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="150dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lanzarServicio" />
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/framelayout"
+        app:layout_constraintTop_toBottomOf="@+id/lanzarServicio"
+        app:layout_constraintVertical_bias="0.582" />
 
     <FrameLayout
         android:id="@+id/framelayout"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="100dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginBottom="1dp"
-        app:layout_constraintBottom_toTopOf="@+id/fragment"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/fragment"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lanzarServicio">
+        app:layout_constraintTop_toTopOf="parent">
 
     </FrameLayout>
 
@@ -42,8 +44,8 @@
         android:id="@+id/irAPantallaIntercambiarFragments"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/irAIntercambiarFragments"
         android:onClick="irAIntercambioFragments"
+        android:text="@string/irAIntercambiarFragments"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

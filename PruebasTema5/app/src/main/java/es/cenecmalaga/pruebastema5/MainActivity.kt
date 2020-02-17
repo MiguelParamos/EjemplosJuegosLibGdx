@@ -7,6 +7,8 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import es.cenecmalaga.pruebastema5.fragmentos.Fragmento2
+import es.cenecmalaga.pruebastema5.servicios.Servicio
 
 class MainActivity : AppCompatActivity() {
 
@@ -14,7 +16,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         //Creo fragment
-        var frag2:Fragmento2= Fragmento2()
+        var frag2: Fragmento2 =
+            Fragmento2()
         //Recupero FragmentManager que me permite insertar fragments en la actividad
         var manager:FragmentManager=this.supportFragmentManager
         //Empiezo la transacción para meter todos los fragment de golpe en la vista
@@ -25,7 +28,7 @@ class MainActivity : AppCompatActivity() {
 
     fun lanzarServicio(view: View) {
         var intent:Intent=
-            Intent(this,Servicio::class.java)
+            Intent(this, Servicio::class.java)
         intent.putExtra("mensaje","mensaje al servicio")
         startService(intent);
 

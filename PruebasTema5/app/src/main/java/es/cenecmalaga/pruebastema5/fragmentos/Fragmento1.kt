@@ -1,10 +1,11 @@
-package es.cenecmalaga.pruebastema5
+package es.cenecmalaga.pruebastema5.fragmentos
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import es.cenecmalaga.pruebastema5.R
 
 public class Fragmento1 : Fragment() {
 
