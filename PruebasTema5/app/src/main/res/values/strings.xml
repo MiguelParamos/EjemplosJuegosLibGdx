@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">PruebasTema5</string>
     <string name="lanzarServicio">Lanzar Servicio</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="pulsame">Púlsame!</string>
+    <string name="hello_blank_fragment">Hola, fragmento en blanco</string>
+    <string name="irAIntercambiarFragments">Ir a intercambiar Fragments</string>
 </resources>

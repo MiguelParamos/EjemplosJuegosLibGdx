@@ -10,8 +10,8 @@
         android:id="@+id/lanzarServicio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/lanzarServicio"
         android:onClick="lanzarServicio"
+        android:text="@string/lanzarServicio"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -25,4 +25,26 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/lanzarServicio" />
+
+    <FrameLayout
+        android:id="@+id/framelayout"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginBottom="1dp"
+        app:layout_constraintBottom_toTopOf="@+id/fragment"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lanzarServicio">
+
+    </FrameLayout>
+
+    <Button
+        android:id="@+id/irAPantallaIntercambiarFragments"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/irAIntercambiarFragments"
+        android:onClick="irAIntercambioFragments"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
