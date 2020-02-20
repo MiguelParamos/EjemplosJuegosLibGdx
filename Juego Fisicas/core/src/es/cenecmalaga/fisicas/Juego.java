@@ -6,6 +6,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapObjects;
@@ -52,9 +53,14 @@ public class Juego extends Game {
 	private OrthogonalTiledMapRenderer renderer;
 	private static final float pixelsPorCuadro=16f;
 	private Teclado teclado;
+	private int puntuacion;
+	private SpriteBatch batchTexto;
+	private Body paredFinal;
+	BitmapFont textoPuntuacion;
 
 	@Override
 	public void create () {
+		puntuacion=0;
 		batch=new SpriteBatch();
 		world=new World(new Vector2(0,-9.8f),true);
 		pollo=new Pollo(world);
@@ -64,7 +70,8 @@ public class Juego extends Game {
 		this.debugRenderer=new Box2DDebugRenderer();
 		camara.position.x=pollo.getX();
 		camara.position.y=pollo.getY();
-
+		textoPuntuacion = new BitmapFont();
+		batchTexto=new SpriteBatch();
 		//Era un suelo alternativo, creado sin mapa, lo quitamos para probar mapa
 		//BodyDef propiedadesSuelo= new BodyDef(); //Establecemos las propiedades del cuerpo
 		//propiedadesSuelo.type = BodyDef.BodyType.StaticBody;
@@ -82,7 +89,6 @@ public class Juego extends Game {
 		renderer = new OrthogonalTiledMapRenderer(mapa, 1/pixelsPorCuadro);
 
 
-
 		//Creamos el cuerpo físico de todos los rectángulos del tmx
 		for (MapObject objeto:mapa.getLayers().get("objetos").getObjects()){
 			BodyDef propiedadesRectangulo= new BodyDef(); //Establecemos las propiedades del cuerpo
@@ -93,6 +99,10 @@ public class Juego extends Game {
 			propiedadesFisicasRectangulo.shape = formaRectanguloSuelo;
 			propiedadesFisicasRectangulo.density = 1f;
 			rectanguloSuelo.createFixture(propiedadesFisicasRectangulo);
+			//Cojo la pared final como objeto especial
+			if(objeto.getName()!=null&&objeto.getName().equals("paredFinal")){
+				paredFinal=rectanguloSuelo;
+			}
 		}
 
 		teclado=new Teclado(pollo);
@@ -112,7 +122,15 @@ public class Juego extends Game {
 				if(contact.getFixtureA().getBody()==pollo.getCuerpo()&&
 						contact.getFixtureB().getBody()==jackie.getCuerpo()){
 					pollo.getCuerpo().applyForceToCenter(300,500,true);
+					puntuacion++;
+					Gdx.app.log("Puntación",puntuacion+"");
 				}
+				if(contact.getFixtureA().getBody()==pollo2.getCuerpo()&&
+						contact.getFixtureB().getBody()==jackie.getCuerpo()){
+					pollo2.getCuerpo().applyForceToCenter(300,500,true);
+					puntuacion++;
+				}
+
 			}
 
 			@Override
@@ -146,6 +164,10 @@ public class Juego extends Game {
 		pollo.draw(batch,0);
 		pollo2.draw(batch,0);
 		batch.end();
+
+		batchTexto.begin();
+		textoPuntuacion.draw(batchTexto, puntuacion+" puntos",Gdx.graphics.getHeight()/30,Gdx.graphics.getHeight()-Gdx.graphics.getHeight()/30,Gdx.graphics.getWidth(),-1,false);
+		batchTexto.end();
 
 		camara.update();
 		debugRenderer.render(world, camara.combined);
