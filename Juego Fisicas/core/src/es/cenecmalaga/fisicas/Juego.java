@@ -3,11 +3,13 @@ package es.cenecmalaga.fisicas;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.objects.CircleMapObject;
@@ -34,11 +36,14 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.Shape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.sun.org.apache.xpath.internal.operations.Or;
 
 import Personajes.Jackie;
 import Personajes.Pollo;
+import basededatos.BaseDeDatos;
+import constantes.Constantes;
 import input.Teclado;
 
 public class Juego extends Game {
@@ -57,10 +62,18 @@ public class Juego extends Game {
 	private SpriteBatch batchTexto;
 	private Body paredFinal;
 	BitmapFont textoPuntuacion;
+	BaseDeDatos baseDeDatos;
+	private boolean esAndroid;
+
+	public Juego(BaseDeDatos bd,boolean android){
+		baseDeDatos=bd;
+		this.esAndroid=android;
+		Constantes.init(this.esAndroid);
+	}
 
 	@Override
 	public void create () {
-		puntuacion=0;
+		puntuacion=baseDeDatos.cargar();
 		batch=new SpriteBatch();
 		world=new World(new Vector2(0,-9.8f),true);
 		pollo=new Pollo(world);
@@ -123,12 +136,14 @@ public class Juego extends Game {
 						contact.getFixtureB().getBody()==jackie.getCuerpo()){
 					pollo.getCuerpo().applyForceToCenter(300,500,true);
 					puntuacion++;
+					baseDeDatos.guardar(puntuacion);
 					Gdx.app.log("Puntación",puntuacion+"");
 				}
 				if(contact.getFixtureA().getBody()==pollo2.getCuerpo()&&
 						contact.getFixtureB().getBody()==jackie.getCuerpo()){
 					pollo2.getCuerpo().applyForceToCenter(300,500,true);
 					puntuacion++;
+					baseDeDatos.guardar(puntuacion);
 				}
 
 			}
@@ -166,7 +181,18 @@ public class Juego extends Game {
 		batch.end();
 
 		batchTexto.begin();
-		textoPuntuacion.draw(batchTexto, puntuacion+" puntos",Gdx.graphics.getHeight()/30,Gdx.graphics.getHeight()-Gdx.graphics.getHeight()/30,Gdx.graphics.getWidth(),-1,false);
+		if(!esAndroid) {
+			textoPuntuacion.draw(batchTexto, puntuacion + " puntos", Gdx.graphics.getHeight() / 30, Gdx.graphics.getHeight() - Gdx.graphics.getHeight() / 30, Gdx.graphics.getWidth(), -1, false);
+		}else{
+			FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fuente/arial.ttf"));
+			FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+			parameter.size = 60;
+			parameter.borderColor=new Color(0.1f,0.1f,0.1f,1);
+			parameter.borderWidth=3f;
+			parameter.incremental=true;
+			textoPuntuacion = generator.generateFont(parameter);
+			textoPuntuacion.draw(batchTexto, puntuacion + " puntos", Gdx.graphics.getHeight() / 30, Gdx.graphics.getHeight() - Gdx.graphics.getHeight() / 30, Gdx.graphics.getWidth(), -1, false);
+		}
 		batchTexto.end();
 
 		camara.update();
