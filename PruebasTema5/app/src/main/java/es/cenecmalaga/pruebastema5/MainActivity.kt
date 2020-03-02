@@ -16,15 +16,14 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import es.cenecmalaga.pruebastema5.fragmentos.Fragmento2
-import es.cenecmalaga.pruebastema5.interfaces.SliderColor
 import es.cenecmalaga.pruebastema5.servicios.Servicio
 import kotlinx.android.synthetic.main.activity_main.view.*
 
-class MainActivity : AppCompatActivity() ,SliderColor {
-    val imagen: ImageView by lazy{findViewById<ImageView>(R.id.imagenTint)}
+class MainActivity : AppCompatActivity()  {
+   private  val imagen: ImageView by lazy{findViewById<ImageView>(R.id.imagenTint)}
     val layoutFondo:FrameLayout by lazy { findViewById<FrameLayout>(R.id.layoutFondo) }
 
-    override fun colorAImagen(c: Int) {
+     fun colorAImagen(c: Int) {
         imagen.setColorFilter(Color.argb(255,c,0,0));
         layoutFondo.setBackgroundColor(Color.argb(255,c,0,0));
     }
@@ -71,11 +70,7 @@ class MainActivity : AppCompatActivity() ,SliderColor {
         startActivity(intent)
     }
 
-    fun cambiarColorImagen(view: View) {
-        val seekBar:SeekBar=view as SeekBar
-        Toast.makeText(this,"Valor Seekbar: "+seekBar.progress,Toast.LENGTH_LONG).show()
-        colorAImagen(seekBar.progress)
-    }
+
 
     fun Color100(view: View) {
         Toast.makeText(this,"Cambiando color a 100",Toast.LENGTH_LONG).show()
