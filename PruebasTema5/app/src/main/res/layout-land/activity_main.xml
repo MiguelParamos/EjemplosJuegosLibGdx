@@ -49,4 +49,25 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/imagenTint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/fragment"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@mipmap/ic_launcher" />
+
+    <FrameLayout
+        android:id="@+id/layoutFondo"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/irAPantallaIntercambiarFragments"
+        app:layout_constraintEnd_toStartOf="@+id/fragment"
+        app:layout_constraintStart_toEndOf="@+id/framelayout"
+        app:layout_constraintTop_toBottomOf="@+id/lanzarServicio">
+
+    </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
