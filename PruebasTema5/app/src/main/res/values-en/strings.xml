@@ -10,4 +10,6 @@
     <string name="fragmento4">Fragment 4</string>
     <string name="nombre">Nombre</string>
     <string name="esteEsElFragment4">Este es el Fragment 4</string>
+    <string name="mensajeDialogo1">I am dialog 1, like it or not.</string>
+    <string name="tituloDialogo1">Dialog 1</string>
 </resources>

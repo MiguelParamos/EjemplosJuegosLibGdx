@@ -16,12 +16,14 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import es.cenecmalaga.pruebastema5.fragmentos.Fragmento2
+import es.cenecmalaga.pruebastema5.fragmentos.MiAlerta
 import es.cenecmalaga.pruebastema5.servicios.Servicio
 import kotlinx.android.synthetic.main.activity_main.view.*
 
 class MainActivity : AppCompatActivity()  {
    private  val imagen: ImageView by lazy{findViewById<ImageView>(R.id.imagenTint)}
     val layoutFondo:FrameLayout by lazy { findViewById<FrameLayout>(R.id.layoutFondo) }
+    val fragmentManager:FragmentManager by lazy{this.supportFragmentManager}
 
      fun colorAImagen(c: Int) {
         imagen.setColorFilter(Color.argb(255,c,0,0));
@@ -34,10 +36,9 @@ class MainActivity : AppCompatActivity()  {
         //Creo fragment
         var frag2: Fragmento2 =
             Fragmento2()
-        //Recupero FragmentManager que me permite insertar fragments en la actividad
-        var manager:FragmentManager=this.supportFragmentManager
+
         //Empiezo la transacción para meter todos los fragment de golpe en la vista
-        var transaccion:FragmentTransaction=manager.beginTransaction()
+        var transaccion:FragmentTransaction=fragmentManager.beginTransaction()
         transaccion.add(R.id.framelayout,frag2,"miFragmento2")
         transaccion.commit()
     }
@@ -51,6 +52,9 @@ class MainActivity : AppCompatActivity()  {
     }
 
     fun quitarFragmento2(view: View) {
+        val fm:FragmentManager=this.supportFragmentManager
+        val miAlerta:MiAlerta= MiAlerta()
+        miAlerta.show(fm,"alerta")
         //Recupero fragmentManager para poder obtener el fragment que quiero
         var manager:FragmentManager=this.supportFragmentManager
         //Recupero el fragment a través del manager
@@ -77,5 +81,10 @@ class MainActivity : AppCompatActivity()  {
         colorAImagen(100)
     }
 
+    override fun onBackPressed() {
+        //super.onBackPressed()
+        val miAlerta:MiAlerta= MiAlerta()
+        miAlerta.show(fragmentManager,"alerta")
+    }
 
 }
