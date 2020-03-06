@@ -11,4 +11,5 @@
     <string name="esteEsElFragment4">Este es el Fragment 4</string>
     <string name="mensajeDialogo1">Soy el dialogo 1, te guste o no.</string>
     <string name="tituloDialogo1">Dialogo 1</string>
+    <string name="irAtras">Ir atrás</string>
 </resources>

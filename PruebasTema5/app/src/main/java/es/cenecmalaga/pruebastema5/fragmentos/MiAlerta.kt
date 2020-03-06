@@ -5,6 +5,7 @@ import android.app.Dialog
 import android.content.DialogInterface
 import android.os.Bundle
 import androidx.fragment.app.DialogFragment
+import es.cenecmalaga.pruebastema5.MainActivity
 import es.cenecmalaga.pruebastema5.R
 
 class MiAlerta: DialogFragment() {
@@ -16,6 +17,7 @@ class MiAlerta: DialogFragment() {
             (object: DialogInterface.OnClickListener{
             override fun onClick(dialog: DialogInterface?, which: Int) {
                 dialog!!.dismiss()
+                (activity as MainActivity).pressBack()
             }
 
         }))

@@ -1,5 +1,6 @@
 package es.cenecmalaga.pruebastema5
 
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.graphics.Color
@@ -10,6 +11,7 @@ import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.SeekBar
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.core.widget.ImageViewCompat
 import androidx.fragment.app.Fragment
@@ -83,8 +85,23 @@ class MainActivity : AppCompatActivity()  {
 
     override fun onBackPressed() {
         //super.onBackPressed()
-        val miAlerta:MiAlerta= MiAlerta()
-        miAlerta.show(fragmentManager,"alerta")
+        var builder:AlertDialog.Builder=AlertDialog.Builder(this);
+        builder.setTitle(R.string.irAtras);
+        builder.setMessage(R.string.irAtras);
+        val thisRef:MainActivity=this;
+        builder.setPositiveButton("Me gusta",
+            (object: DialogInterface.OnClickListener{
+                override fun onClick(dialog: DialogInterface?, which: Int) {
+                    dialog!!.dismiss()
+                    thisRef.pressBack()
+                }
+
+            }))
+       builder.create().show();
+    }
+
+    fun pressBack(){
+        super.onBackPressed()
     }
 
 }
