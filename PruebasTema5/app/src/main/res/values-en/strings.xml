@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Unit 5 test</string>
+    <string name="lanzarServicio">Launch service</string>
+    <string name="pulsame">Press me!</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="irAIntercambiarFragments">Go to fragments interchange</string>
+    <string name="fragmento2">Fragment 2</string>
+    <string name="fragmento3">Fragment 3</string>
+    <string name="fragmento4">Fragment 4</string>
+    <string name="nombre">Nombre</string>
+    <string name="esteEsElFragment4">Este es el Fragment 4</string>
+    <string name="mensajeDialogo1">I am dialog 1, like it or not.</string>
+    <string name="tituloDialogo1">Dialog 1</string>
+    <string name="irAtras">Go Back</string>
+</resources>

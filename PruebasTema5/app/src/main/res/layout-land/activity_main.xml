@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <Button
+        android:id="@+id/lanzarServicio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="lanzarServicio"
+        android:text="@string/lanzarServicio"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <fragment
+        android:id="@+id/fragment"
+        android:name="es.cenecmalaga.pruebastema5.fragmentos.Fragmento1"
+        android:layout_width="wrap_content"
+        android:layout_height="150dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/framelayout"
+        app:layout_constraintTop_toBottomOf="@+id/lanzarServicio"
+        app:layout_constraintVertical_bias="0.582" />
+
+    <FrameLayout
+        android:id="@+id/framelayout"
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/fragment"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </FrameLayout>
+
+    <Button
+        android:id="@+id/irAPantallaIntercambiarFragments"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="irAIntercambioFragments"
+        android:text="@string/irAIntercambiarFragments"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/imagenTint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/fragment"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@mipmap/ic_launcher" />
+
+    <FrameLayout
+        android:id="@+id/layoutFondo"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/irAPantallaIntercambiarFragments"
+        app:layout_constraintEnd_toStartOf="@+id/fragment"
+        app:layout_constraintStart_toEndOf="@+id/framelayout"
+        app:layout_constraintTop_toBottomOf="@+id/lanzarServicio">
+
+    </FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
